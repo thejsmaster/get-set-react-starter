@@ -278,6 +278,25 @@ function objToQueryString(obj: any): string {
   return queryParams.toString();
 }
 
+export const useQS = (qs: any, replace: boolean = true) => {
+  useEffect(() => {
+    if (routeState.path !== routeState.path) {
+      let nullIfy: any = {};
+      Object.keys(qs).forEach((key) => {
+        nullIfy[key] = null;
+      });
+      updateQS(nullIfy, replace);
+    }
+  }, []);
+  useEffect(() => {
+    routeState.navigateTo(routeState.path, {
+      qs: { ...qs, ...routeState.qs },
+      replace,
+    });
+  }, [qs, replace]);
+  return routeState.qs;
+};
+
 export const useQsState = (qs: any, replace: boolean = true) => {
   const [count, setCount] = useState(0);
   const [pathname, setPathname] = useState(routeState.path);
@@ -339,7 +358,7 @@ export function useDependencyChangeEffect(callback: any, dependencies: any) {
   return handleDependenciesChange;
 }
 
-export const Link = ({ path = "/", qs = {}, children }: any) => {
+export const Link = ({ path = "/", qs = {}, children, to: any }: any) => {
   return (
     <div
       onClick={() => {
@@ -349,4 +368,11 @@ export const Link = ({ path = "/", qs = {}, children }: any) => {
       {children && children}
     </div>
   );
+};
+
+export type TRoute = {
+  paths: string[];
+  component: any;
+  roles: string[];
+  qsKeys: string[];
 };

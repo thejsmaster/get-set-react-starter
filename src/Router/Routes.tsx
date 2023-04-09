@@ -1,24 +1,25 @@
 import { Counter } from "../Counter";
 import { Header } from "../Header";
 import { User } from "../User";
+import { TRoute } from "./Router";
 
+export type TRoutes = {
+  [key: string]: TRoute;
+};
 export const Routes = {
   header: {
     paths: ["*"],
     component: Header,
-    qsKeys:["brand"]
   },
   cai: {
     paths: ["/count", "/count/age", "/count/age/10"],
     component: Counter,
     roles: ["user"],
-    qsKeys:["count"]
   },
   pai: {
     paths: ["/user", "/user/photos", "/user/posts"],
     component: User,
     roles: ["user"],
-    qsKeys:["age", "username"]
   },
 };
 

@@ -21,7 +21,7 @@ function App() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
-      <Link path="/count" qs={{ count: 1 }}>
+      <Link path={Routes.cai.paths[0]} qs={{ count: 1 }}>
         count
       </Link>{" "}
       <Link path="/user/photos" qs={{ age: 9 }}>
